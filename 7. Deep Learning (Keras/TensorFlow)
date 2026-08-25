@@ -1,0 +1,25 @@
+import tensorflow as tf
+from tensorflow.keras import layers, models
+
+modelo = models.Sequential([
+    layers.Dense(64, activation="relu", input_shape=(X_train.shape[1],)),
+    layers.Dropout(0.3),
+    layers.Dense(32, activation="relu"),
+    layers.Dense(1, activation="sigmoid")
+])
+
+modelo.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+
+historico = modelo.fit(
+    X_train_scaled, y_train,
+    validation_split=0.2,
+    epochs=50,
+    batch_size=32,
+    callbacks=[tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)]
+)
+
+# Curvas de treino
+plt.plot(historico.history["loss"], label="treino")
+plt.plot(historico.history["val_loss"], label="validação")
+plt.legend()
+plt.show()
