@@ -1,0 +1,4 @@
+import joblib
+
+joblib.dump(modelo, "modelo.pkl")
+modelo_carregado = joblib.load("modelo.pkl")
