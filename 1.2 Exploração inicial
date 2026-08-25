@@ -1,0 +1,8 @@
+df.head()
+df.info()
+df.describe(include="all")
+df.shape
+df.columns.tolist()
+df.dtypes
+df.isnull().sum()
+df.duplicated().sum()
