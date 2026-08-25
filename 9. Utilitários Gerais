@@ -1,0 +1,17 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+# Medir tempo de execução
+import time
+inicio = time.time()
+# ... código ...
+print(f"Tempo: {time.time() - inicio:.2f}s")
+
+# Exportar resultados
+df.to_csv("resultado.csv", index=False)
+df.to_excel("resultado.xlsx", index=False)
+
+# Logging simples
+import logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.info("Processo concluído.")
