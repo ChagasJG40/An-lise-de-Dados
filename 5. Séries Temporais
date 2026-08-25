@@ -1,0 +1,16 @@
+import pandas as pd
+from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+df["data"] = pd.to_datetime(df["data"])
+df = df.set_index("data").sort_index()
+
+# Decomposição
+decomposicao = seasonal_decompose(df["valor"], model="additive", period=12)
+decomposicao.plot()
+plt.show()
+
+# Modelo ARIMA
+modelo = ARIMA(df["valor"], order=(1, 1, 1))
+resultado = modelo.fit()
+previsao = resultado.forecast(steps=12)
