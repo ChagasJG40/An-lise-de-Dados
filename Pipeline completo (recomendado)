@@ -1,0 +1,21 @@
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+
+num_cols = ["idade", "renda"]
+cat_cols = ["categoria", "regiao"]
+
+num_pipeline = Pipeline([
+    ("imputer", SimpleImputer(strategy="median")),
+    ("scaler", StandardScaler())
+])
+
+cat_pipeline = Pipeline([
+    ("imputer", SimpleImputer(strategy="most_frequent")),
+    ("onehot", OneHotEncoder(handle_unknown="ignore"))
+])
+
+preprocessor = ColumnTransformer([
+    ("num", num_pipeline, num_cols),
+    ("cat", cat_pipeline, cat_cols)
+])
