@@ -1,0 +1,3 @@
+df.groupby("categoria")["valor"].agg(["mean", "sum", "count"])
+pd.pivot_table(df, values="valor", index="categoria", columns="mes", aggfunc="sum")
+df.groupby(["categoria", "regiao"]).size().reset_index(name="qtd")
