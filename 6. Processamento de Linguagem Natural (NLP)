@@ -1,0 +1,16 @@
+import re
+import nltk
+from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+def limpar_texto(texto):
+    texto = texto.lower()
+    texto = re.sub(r"[^a-zA-ZÀ-ÿ\s]", "", texto)
+    texto = re.sub(r"\s+", " ", texto).strip()
+    return texto
+
+df["texto_limpo"] = df["texto"].apply(limpar_texto)
+
+stop_words = stopwords.words("portuguese")
+vectorizer = TfidfVectorizer(stop_words=stop_words, max_features=5000)
+X_tfidf = vectorizer.fit_transform(df["texto_limpo"])
