@@ -1,0 +1,11 @@
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
+
+modelo = RandomForestClassifier(n_estimators=300, random_state=42)
+modelo.fit(X_train, y_train)
+y_pred = modelo.predict(X_test)
+y_proba = modelo.predict_proba(X_test)[:, 1]
+
+print(classification_report(y_test, y_pred))
+print("AUC:", roc_auc_score(y_test, y_proba))
+print(confusion_matrix(y_test, y_pred))
