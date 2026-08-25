@@ -1,0 +1,10 @@
+resumo_df = df.describe().to_string()
+
+response = client.messages.create(
+    model="claude-sonnet-5",
+    max_tokens=800,
+    messages=[
+        {"role": "user", "content": f"Analise este resumo estatístico e aponte 3 insights:\n\n{resumo_df}"}
+    ]
+)
+print(response.content[0].text)
